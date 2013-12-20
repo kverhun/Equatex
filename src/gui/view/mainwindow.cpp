@@ -24,8 +24,22 @@ void MainWindow::initialize()
     connect(this->ui->actionDatabase_connection, SIGNAL(triggered()), this, SLOT(on_menuTools_DBConnection_clicked()));
     connect(this->ui->actionImport_image, SIGNAL(triggered()), this, SLOT(on_menuTools_ImportImage_clicked()));
 
-    ui->imageHeigth_edit->setText(320);
-    ui->imageWidth_edit->setText(240);
+    ui->imageHeigth_edit->setText("240");
+    ui->imageWidth_edit->setText("320");
+
+    QStringList colorList = QStringList();
+    colorList.append("black");
+    colorList.append("white");
+    colorList.append("blue");
+    colorList.append("red");
+    colorList.append("green");
+
+    ui->background_cbox->clear();
+    ui->background_cbox->addItems(colorList);
+    ui->background_cbox->setCurrentText("white");
+    ui->fontColor_cBox->clear();
+    ui->fontColor_cBox->addItems(colorList);
+    ui->fontColor_cBox->setCurrentText("Black");
 }
 
 MainWindow::~MainWindow()
@@ -123,3 +137,33 @@ QString MainWindow::getImageHeight()
 {
     return ui->imageHeigth_edit->text();
 }
+
+void MainWindow::on_fontColor_checkBox_clicked()
+{
+    if (ui->fontColor_checkBox->isChecked())
+    {
+        ui->fontColor_cBox->setEnabled(true);
+    }
+    else
+    {
+        ui->fontColor_cBox->setEnabled(false);
+    }
+}
+
+
+bool MainWindow::getFontColorUse()
+{
+    return this->ui->fontColor_checkBox->isChecked();
+}
+
+QString MainWindow::getFontColor()
+{
+    return this->ui->fontColor_cBox->currentText();
+}
+
+QString MainWindow::getBackground()
+{
+    return this->ui->background_cbox->currentText();
+}
+
+

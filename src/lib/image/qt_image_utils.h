@@ -16,9 +16,12 @@ QImage create_image(int width, int height, QColor color);
 QImage get_image(QString latex_cmd, int width, int height, QString type);
 
 
-bool isWhite(QColor color);
+bool isWhite(QColor color, int min_bright=200);
 
 void InsertImage(QImage& dest, QImage& img, int pos_w, int pos_h);
 
+void InsertImage(QImage& dest, QImage& img, int pos_w, int pos_h, QColor color, bool useFont, int min_bright);
+
+QColor qstring_to_qcolor(QString qstr);
 
 #endif // QT_IMAGE_UTILS_H

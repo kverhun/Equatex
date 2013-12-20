@@ -13,8 +13,7 @@ public:
     void set_bot (Expression expr);
     string toXml();
 
-    QImage toImage(int width, int height, QString type, QColor background);
-
+    QImage toImage(int width, int height, QString type, QColor background, QColor font=QColor(Qt::black),  bool useFont = false);
     int width_symbols();
 private:
     Expression top;

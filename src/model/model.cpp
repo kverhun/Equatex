@@ -91,10 +91,19 @@ QImage Model::Image()
     return this->img;
 }
 
-void Model::ImageConstruct(int w, int h, QString type, QColor background)
+void Model::ImageConstruct(int w, int h, QString type, QColor background, QColor font,  bool useFont)
 {
     //
-    this->img = this->expr.toImage(w,h,type, background);
+    try
+    {
+        this->img = this->expr.toImage(w,h,type, background, font, useFont);
+    }
+    catch(...)
+    {
+        QMessageBox mb;
+        mb.setText("Error image generating");
+        mb.exec();
+    }
 }
 
 bool Model::dbAddImageClass(QString name, QString desc)

@@ -41,9 +41,9 @@ QImage get_image(QString latex_cmd, int width, int height, QString type)
     return img;
 }
 
-bool isWhite(QColor color)
+bool isWhite(QColor color, int min_bright)
 {
-    if (color.lightness() > 150)
+    if (color.lightness() > min_bright)
         return true;
     else
         return false;
@@ -56,7 +56,7 @@ void InsertImage(QImage& dest, QImage& img, int pos_w, int pos_h)
         for (int c_h = 0; c_h < img.height(); ++c_h)
         {
             QColor c_color = img.pixel(c_w, c_h);
-            if (!isWhite(c_color))
+            if (!isWhite(c_color, 257))
             {
                 if (pos_w+c_w < dest.width() && pos_w+c_w > 0 &&  pos_h+c_h < dest.height() && pos_h+c_h>0)
                     dest.setPixel(pos_w+c_w, pos_h+c_h, img.pixel(c_w, c_h));
@@ -64,3 +64,48 @@ void InsertImage(QImage& dest, QImage& img, int pos_w, int pos_h)
         }
     }
 }
+
+
+void InsertImage(QImage& dest, QImage& img, int pos_w, int pos_h, QColor color, bool useFont, int min_bright)
+{
+    for (int c_w = 0; c_w < img.width(); ++c_w)
+    {
+        for (int c_h = 0; c_h < img.height(); ++c_h)
+        {
+            QColor c_color = img.pixel(c_w, c_h);
+            if (!isWhite(c_color,min_bright))
+            {
+                if (pos_w+c_w < dest.width() && pos_w+c_w > 0 &&  pos_h+c_h < dest.height() && pos_h+c_h>0)
+                {
+                    if (useFont)
+                    {
+                        dest.setPixel(pos_w+c_w, pos_h+c_h, qRgb(color.red(), color.green(), color.blue()));
+                    }
+                    else
+                    {
+                        dest.setPixel(pos_w+c_w, pos_h+c_h, img.pixel(c_w, c_h));
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+QColor qstring_to_qcolor(QString qstr)
+{
+    if (qstr == "black")
+        return QColor(Qt::black);
+    if (qstr == "blue")
+        return QColor(Qt::blue);
+    if (qstr == "red")
+        return QColor(Qt::red);
+    if (qstr == "green")
+        return QColor(Qt::green);
+    if (qstr == "white")
+        return QColor(Qt::white);
+    return QColor(Qt::white);
+}
+
+
+

@@ -10,7 +10,9 @@ using std::list;
 #include <QString>
 
 const double frac_coef = 1;
-const double ind_coef = 1;
+const double ind_coef = 0.75;
+
+const int min_brigth = 257;
 
 class Expression
 {
@@ -22,7 +24,7 @@ public:
     bool isValid() const;
     string toXml() const;
 
-    QImage toImage(int width, int height, QString type, QColor background) const;
+    QImage toImage(int width, int height, QString type, QColor background, QColor font=QColor(Qt::black),  bool useFont = false) const;
     int width_symbols();
 private:
     list<Item*> items;

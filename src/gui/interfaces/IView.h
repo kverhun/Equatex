@@ -42,6 +42,11 @@ public:
     virtual QString getSelectedType() = 0;
     virtual QString getImageWidth() = 0;
     virtual QString getImageHeight() = 0;
+
+    virtual bool getFontColorUse() = 0;
+    virtual QString getFontColor() = 0;
+    virtual QString getBackground() = 0;
+
     /*
      *  Setter functions
      *

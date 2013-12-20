@@ -26,6 +26,9 @@ public:
     QString getImageWidth();
     QString getImageHeight();
 
+    bool getFontColorUse();
+    QString getFontColor();
+    QString getBackground();
 
     /*
      *  Setter functions
@@ -49,6 +52,8 @@ private slots:
     void on_regenImage_button_clicked();
 
     void on_imageGen_button_clicked();
+
+    void on_fontColor_checkBox_clicked();
 
 private:
     Ui::MainWindow *ui;

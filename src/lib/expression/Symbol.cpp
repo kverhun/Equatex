@@ -68,7 +68,7 @@ tex_char Symbol::get_char()
 }
 
 
-QImage Symbol::toImage(int width, int height, QString type, QColor background)
+QImage Symbol::toImage(int width, int height, QString type, QColor background, QColor font,  bool useFont)
 {
     QImage full_img = QImage(width, height, QImage::Format_RGB32);
     full_img.fill(background);
@@ -93,8 +93,8 @@ QImage Symbol::toImage(int width, int height, QString type, QColor background)
 
     QImage symb_img = get_image(QString::fromStdString(this->cmd), symb_w, symb_h, type);
 
-    QImage top_img = this->top_index.toImage(top_w, top_h, type, background);
-    QImage bot_img = this->bot_index.toImage(bot_w, bot_h, type, background);
+    QImage top_img = this->top_index.toImage(top_w, top_h, type, background, font, useFont);
+    QImage bot_img = this->bot_index.toImage(bot_w, bot_h, type, background, font, useFont);
 
     int symb_pos_h = (height-symb_h)/2;
     int symb_pos_w = 0;
@@ -105,7 +105,7 @@ QImage Symbol::toImage(int width, int height, QString type, QColor background)
     int bot_pos_h = symb_pos_h + symb_h - symb_h/4;
     int bot_pos_w = symb_pos_w+symb_w - symb_w/4;
 
-    InsertImage(full_img, symb_img, symb_pos_w, symb_pos_h);
+    InsertImage(full_img, symb_img, symb_pos_w, symb_pos_h,font,useFont,100);
     InsertImage(full_img, top_img, top_pos_w, top_pos_h);
     InsertImage(full_img, bot_img, bot_pos_w, bot_pos_h);
 

@@ -32,7 +32,9 @@ public:
     QString ExpressionLatex() const;
 
     QImage Image();
-    void ImageConstruct(int w, int h, QString type, QColor background);
+    void ImageConstruct(int w, int h, QString type, QColor background, QColor font=QColor(Qt::black),  bool useFont = false);
+
+
 private:
 
     // storing current expression

@@ -145,7 +145,7 @@ string Expression::toXml() const
         return "<expression>\n invalid expr \n </expression>\n";
 }
 
-QImage Expression::toImage(int width, int height, QString type, QColor background) const
+QImage Expression::toImage(int width, int height, QString type, QColor background, QColor font,  bool useFont) const
 {
     if (this->isEmpty())
     {
@@ -173,7 +173,7 @@ QImage Expression::toImage(int width, int height, QString type, QColor backgroun
     auto it_w = widths.begin();
     for (Item* it : items)
     {
-        item_imgs.push_back(it->toImage(*it_w, height,type,background));
+        item_imgs.push_back(it->toImage(*it_w, height,type,background, font, useFont));
         ++it_w;
     }
 
@@ -184,11 +184,13 @@ QImage Expression::toImage(int width, int height, QString type, QColor backgroun
     {
         //painter.drawImage(pos, img);
         //pos += QPoint(img.width(),0);
-        InsertImage(expr_img, img, pos_w, 0);
+        InsertImage(expr_img, img, pos_w,0);
         pos_w += img.width();
     }
     return expr_img;
 }
+
+
 
 int Expression::width_symbols()
 {

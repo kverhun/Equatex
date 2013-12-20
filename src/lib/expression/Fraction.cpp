@@ -42,7 +42,7 @@ string Fraction::toXml()
     return xml;
 }
 
-QImage Fraction::toImage(int width, int height, QString type, QColor background)
+QImage Fraction::toImage(int width, int height, QString type, QColor background, QColor font,  bool useFont)
 {
     QImage frac_img = QImage(width, height, QImage::Format_RGB32);
     frac_img.fill(background);
@@ -61,16 +61,16 @@ QImage Fraction::toImage(int width, int height, QString type, QColor background)
     int top_pos_h = 0;
     int bot_pos_h = height/2;
 
-    QImage top_img = top.toImage(top_w, top_h,type, background);
-    QImage bot_img = bot.toImage(bot_w, bot_h, type, background);
+    QImage top_img = top.toImage(top_w, top_h,type, background, font, useFont);
+    QImage bot_img = bot.toImage(bot_w, bot_h, type, background, font, useFont);
 
     InsertImage(frac_img, top_img, top_pos_w, top_pos_h);
     InsertImage(frac_img, bot_img, bot_pos_w, bot_pos_h);
 
     Symbol line = Symbol("-");
-    QImage line_img = line.toImage(100,100, type, background);
+    QImage line_img = line.toImage(100,100, type, background, font, useFont);
     line_img = line_img.scaled(max(top_w, bot_w),height/15);
-    InsertImage(frac_img, line_img, 0, height/2-height/15);
+    InsertImage(frac_img, line_img, 0, height/2-height/15,font,useFont,min_brigth);
 
     return frac_img;
 }

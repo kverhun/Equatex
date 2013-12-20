@@ -4,6 +4,7 @@
 #include "src/gui/view/dbdialog.h"
 #include "src/gui/interfaces/IImageImportView.h"
 #include "src/gui/view/imageimportdialog.h"
+#include "src/lib/image/qt_image_utils.h"
 
 #include <QMessageBox>
 #include <QFileDialog>
@@ -207,8 +208,11 @@ void Presenter::on_imageGenerateAsked()
         }
 
 
-        model.ImageConstruct(w,h,
-                             view_main->getSelectedType(), QColor(Qt::white));
+
+        model.ImageConstruct(w,h,view_main->getSelectedType(),
+                                 qstring_to_qcolor(view_main->getBackground()),
+                                 qstring_to_qcolor(view_main->getFontColor()),
+                                 view_main->getFontColorUse());
     }
     catch(...)
     {
