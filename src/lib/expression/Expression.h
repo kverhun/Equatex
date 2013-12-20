@@ -11,12 +11,13 @@ class Expression
 public:
     Expression();
     Expression(string texexpr);
-    size_t size();
-    bool isEmpty();
-
-    string toXml();
+    size_t size() const;
+    bool isEmpty() const;
+    bool isValid() const;
+    string toXml() const;
 private:
     list<Item*> items;
+    bool valid;
 };
 
 struct e_wrong_expr

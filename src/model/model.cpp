@@ -7,6 +7,7 @@
 #include "src/lib/files/file_utils.h"
 //#include "src/lib/image/image_utils.h"
 #include "src/lib/image/qt_image_utils.h"
+#include "src/lib/expression/Expression.h"
 
 using namespace std;
 
@@ -16,6 +17,29 @@ Model::Model()
     QMessageBox mb;
     mb.setText(connection->isSuccessful()?"Successful":"Failed");
     mb.exec();
+
+    this->expr = Expression();
+    this->expr_latex = "";
+}
+
+Model::~Model()
+{
+}
+
+const Expression& Model::Expr() const
+{
+    return this->expr;
+}
+
+void Model::ExpressionConstruct(QString latex_str)
+{
+    this->expr_latex = latex_str;
+    this->expr = Expression(latex_str.toStdString());
+}
+
+QString Model::ExpressionLatex() const
+{
+    return this->expr_latex;
 }
 
 QStringList Model::GetStyles()

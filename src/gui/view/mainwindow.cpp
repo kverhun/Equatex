@@ -80,3 +80,8 @@ void MainWindow::setStyleItems(QStringList items)
     ui->imageStyle_cbox->clear();
     ui->imageStyle_cbox->addItems(items);
 }
+
+void MainWindow::setCurrentTab(int tab)
+{
+    ui->editor_tab->setCurrentIndex(tab);
+}

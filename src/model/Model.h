@@ -2,6 +2,7 @@
 #define MODEL_H
 
 #include "Database/dbconnection.h"
+#include "src/lib/expression/Expression.h"
 #include <QString>
 
 class Model
@@ -18,7 +19,16 @@ public:
     bool dbAddImage(QString path,
                     int width, int height,
                     QString type, int symbol_id);
+    ~Model();
+
+    const Expression& Expr() const;
+    void ExpressionConstruct(QString latex_str);
+    QString ExpressionLatex() const;
 private:
+
+    // storing current expression
+    Expression expr;
+    QString expr_latex;
 
 };
 

@@ -20,6 +20,7 @@ bool isCharacter(char c)
         return true;
     if (c=='(' || c==')')
         return true;
+
     return false;
 }
 
@@ -31,7 +32,8 @@ char_type get_type(char c)
         return char_type::bot_ind;
     if (c=='^')
         return char_type::top_ind;
-
+    if (c==' ' || c=='\t' || c=='\n')
+        return char_type::space;
     return char_type::plain_char;
 }
 

@@ -43,6 +43,7 @@ public:
      */
     virtual void setXmlText(QString strxml) = 0;
     virtual void setStyleItems(QStringList items) = 0;
+    virtual void setCurrentTab(int tab) = 0;
 };
 
 #endif // IVIEW_H

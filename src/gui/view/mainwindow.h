@@ -29,7 +29,7 @@ public:
     void setStyleItems(QStringList items);
 
 
-
+    void setCurrentTab(int tab);
 
 private slots:
     void on_openLatex_button_clicked();

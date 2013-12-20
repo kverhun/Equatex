@@ -8,6 +8,13 @@
 #include <QMessageBox>
 #include <QFileDialog>
 
+#include <QtXml/QDomDocument>
+#include <QTextStream>
+
+#include <string>
+
+using namespace std;
+
 Presenter::Presenter(IView *view)
 {
     this->view_main = view;
@@ -72,9 +79,32 @@ void Presenter::onImageImport()
 
 void Presenter::on_xmlPreviewAsked()
 {
-    QMessageBox mb;
-    mb.setText("XML preview asked");
-    mb.exec();
+    QString latex_str = view_main->getLatexText();
+    if (latex_str != model.ExpressionLatex())
+    {
+        model.ExpressionConstruct(latex_str);
+    }
+    if (model.Expr().isValid())
+    {
+        string xml = model.Expr().toXml();
+        QString xml_in = QString::fromStdString(xml);
+        QString xml_out;
+
+        QDomDocument doc;
+        doc.setContent(xml_in, false);
+
+        QTextStream writer(&xml_out);
+        doc.save(writer,4);
+
+        view_main->setXmlText(xml_out);
+    }
+    else
+    {
+        QMessageBox mb;
+        mb.setText("Invalid expression entered!");
+        mb.exec();
+        view_main->setCurrentTab(0);
+    }
 }
 
 void Presenter::on_latexCheckAsked()

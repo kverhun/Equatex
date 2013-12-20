@@ -29,6 +29,8 @@ private:
     // set view data
     void initialize_view();
 
+
+
 private slots:
     // for connection modal window exec
     void onDBConnection();

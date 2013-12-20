@@ -15,7 +15,8 @@ enum char_type
     top_ind,
     bot_ind,
     arg_open,
-    arg_close
+    arg_close,
+    space
 };
 
 bool isCharacter(char c);
