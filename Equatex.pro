@@ -30,7 +30,8 @@ HEADERS  += src/gui/view/mainwindow.h \
     src/gui/interfaces/IView.h \
     src/model/model.h \
     src/model/Database/dbconnection.h \
-    src/model/Database/dbqueries.h
+    src/model/Database/dbqueries.h \
+    src/gui/interfaces/IImageImportView.h
 
 FORMS    += src/gui/view/mainwindow.ui \
     src/gui/view/dbdialog.ui \

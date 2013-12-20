@@ -18,12 +18,12 @@ public:
     ~MainWindow();
 
     /*
-     *  Function getters
+     *  Getter functions
      */
     QString getLatexText();
 
     /*
-     *  Function setters
+     *  Setter functions
      */
     void setXmlText(QString strxml);
     void setStyleItems(QStringList items);
@@ -34,6 +34,7 @@ public:
 private slots:
     void on_openLatex_button_clicked();
     void on_menuTools_DBConnection_clicked();
+    void on_menuTools_ImportImage_clicked();
 
     void on_checkLatex_button_clicked();
     void on_saveXml_button_clicked();
@@ -48,6 +49,7 @@ private:
 
 signals:
     void on_menuTools_DBConnection();
+    void on_menuTools_ImportImage();
     void on_latexCheck_clicked();
     void on_xmlSave_clicked();
     void on_xmlTabSelected();

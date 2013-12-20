@@ -5,6 +5,7 @@
 
 #include "src/gui/interfaces/IView.h"
 #include "src/gui/interfaces/IDBView.h"
+#include "src/gui/interfaces/IImageImportView.h"
 
 #include "src/model/model.h"
 
@@ -18,14 +19,22 @@ public:
 private:
     IView* view_main;
     IDView* view_db;
+    IImageImportView* view_import;
 
     Model model;
+
     // initialize signal/slots
     void initialize();
+
+    // set view data
+    void initialize_view();
 
 private slots:
     // for connection modal window exec
     void onDBConnection();
+
+    // for image import
+    void onImageImport();
 
     // for xml-file generating
     void on_xmlPreviewAsked();
@@ -39,6 +48,20 @@ private slots:
     // for xml-file saving
     void on_xmlSaveAsked();
 
+    /*
+     *  Image import dialog
+     */
+    // for browse
+    void on_import_browse();
+
+    // for import
+    void on_import_import();
+
+    // for cancel
+    void on_import_cancel();
+    /*
+     *  END Image import dialog
+     */
 };
 
 #endif // PRESENTER_H

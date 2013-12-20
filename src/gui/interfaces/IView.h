@@ -12,6 +12,9 @@ public:
     // menu -> tools -> Database connection
     virtual void on_menuTools_DBConnection() = 0;
 
+    // menu -> tools -> Import image
+    virtual void on_menuTools_ImportImage() = 0;
+
     // latex check clicked
     virtual void on_latexCheck_clicked() = 0;
 
@@ -28,14 +31,14 @@ public:
 
 
     /*
-     *  Function getters
+     *  Getter functions
      *
      *
      */
     virtual QString getLatexText() = 0;
 
     /*
-     *  Function setters
+     *  Setter functions
      *
      */
     virtual void setXmlText(QString strxml) = 0;

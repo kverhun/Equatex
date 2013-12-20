@@ -20,7 +20,7 @@ void MainWindow::initialize()
 
     this->setWindowTitle("Equatex project");
     connect(this->ui->actionDatabase_connection, SIGNAL(triggered()), this, SLOT(on_menuTools_DBConnection_clicked()));
-
+    connect(this->ui->actionImport_image, SIGNAL(triggered()), this, SLOT(on_menuTools_ImportImage_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -36,6 +36,11 @@ void MainWindow::on_openLatex_button_clicked()
 void MainWindow::on_menuTools_DBConnection_clicked()
 {
     emit(on_menuTools_DBConnection());
+}
+
+void MainWindow::on_menuTools_ImportImage_clicked()
+{
+    emit(on_menuTools_ImportImage());
 }
 
 /*

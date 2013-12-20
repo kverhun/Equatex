@@ -62,8 +62,8 @@
       <widget class="QComboBox" name="imageStyle_cbox">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>110</y>
+         <x>60</x>
+         <y>100</y>
          <width>131</width>
          <height>22</height>
         </rect>

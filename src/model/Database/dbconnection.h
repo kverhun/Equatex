@@ -2,6 +2,8 @@
 #define DBCONNECTION_H
 
 #include <QString>
+#include <QtSql>
+#include <QtSql/QSqlDatabase>
 
 /*
  *  Class for database connection
@@ -16,10 +18,14 @@ public:
     bool isSuccessful() {return successful;}
 
     QStringList GetStyles();
+    bool InsertImage(QString path, int size,
+                     int width, int height,
+                     QString type, int symbol_id);
 private:
     DBConnection();
     static DBConnection* instance;
     bool successful;
+    QSqlDatabase db;
 };
 
 #endif // DBCONNECTION_H
