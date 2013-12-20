@@ -14,6 +14,8 @@ public:
     QStringList GetStyles();
     QStringList GetSymbolCmds();
 
+    int GetSymbolIdByCmd(QString cmd);
+
     bool dbAddImage(QString path, QString type, QString latex_cmd);
 
     bool dbAddImage(QString path,

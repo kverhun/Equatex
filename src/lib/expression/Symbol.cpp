@@ -4,10 +4,23 @@ using namespace std;
 
 #include <QString>
 
+vector<string> cmd_chars{"partial", "varepsilon"};
 
 Symbol::Symbol(char ch)
 {
     this->ch = tex_char(ch);
+}
+
+Symbol::Symbol(string cmd, Expression top_ind, Expression bot_ind)
+{
+    this->cmd = cmd;
+    this->set_bot_index(bot_ind);
+    this->set_top_index(top_ind);
+}
+
+Symbol::Symbol(string cmd)
+{
+    this->cmd = cmd;
 }
 
 string Symbol::toXml()
@@ -15,9 +28,9 @@ string Symbol::toXml()
     string xml;
     xml += "<symbol>\n";
         xml += "<char>\n";
-            xml += "<id>";
-            xml += char(this->ch.get_id());
-            xml += "</id>\n";
+            xml += "<cmd>";
+            xml += this->get_cmd();
+            xml += "</cmd>\n";
 
             if ( ! this->top_index.isEmpty())
             {

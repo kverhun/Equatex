@@ -4,6 +4,9 @@
 #include "Fraction.h"
 #include "src/lib/parse/parse_utils.h"
 
+#include <algorithm>
+#include <string>
+
 using namespace std;
 
 Expression::Expression()
@@ -31,6 +34,7 @@ bool Expression::isValid() const
 Expression::Expression(string texexpr)
 {
     size_t pos = 0;
+    texexpr.erase(remove(texexpr.begin(), texexpr.end(), ' '), texexpr.end());
     this->valid = true;
     try
     {
@@ -39,7 +43,9 @@ Expression::Expression(string texexpr)
             char_type tp = get_type(texexpr[pos]);
             if (tp == char_type::plain_char)
             {
-                items.push_back(new Symbol(texexpr[pos]));
+                string str;
+                str.push_back(texexpr[pos]);
+                items.push_back(new Symbol(str) );
                 ++pos;
             }
             if (tp == char_type::cmd)
@@ -59,6 +65,10 @@ Expression::Expression(string texexpr)
                     frac->set_bot(Expression(args[1]));
                     items.push_back(frac);
                     pos += 2 + args[0].length() + 2 + args[1].length()+1;
+                }
+                if (find(cmd_chars.begin(), cmd_chars.end(),cmd)!= cmd_chars.end())
+                {
+                    items.push_back(new Symbol(cmd));
                 }
             }
             if (tp == char_type::bot_ind)

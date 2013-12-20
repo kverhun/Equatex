@@ -82,7 +82,17 @@ void Presenter::on_xmlPreviewAsked()
     QString latex_str = view_main->getLatexText();
     if (latex_str != model.ExpressionLatex())
     {
-        model.ExpressionConstruct(latex_str);
+        try
+        {
+            model.ExpressionConstruct(latex_str);
+        }
+        catch (...)
+        {
+            QMessageBox mb;
+            mb.setText("Invalid expression entered!");
+            mb.exec();
+            view_main->setCurrentTab(0);
+        }
     }
     if (model.Expr().isValid())
     {

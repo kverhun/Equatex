@@ -80,4 +80,10 @@ bool Model::dbAddImage(QString path, QString type, QString latex_cmd)
     return added;
 }
 
+int Model::GetSymbolIdByCmd(QString cmd)
+{
+    DBConnection* connection = DBConnection::Instance();
+    return connection->GetSymbolIdByCmd(cmd);
+}
+
 
