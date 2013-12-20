@@ -23,7 +23,11 @@ SOURCES += main.cpp \
     src/model/Database/dbconnection.cpp \
     src/lib/files/file_utils.cpp \
     src/lib/image/image_utils.cpp \
-    src/lib/image/qt_image_utils.cpp
+    src/lib/image/qt_image_utils.cpp \
+    src/lib/parse/pars_utils.cpp \
+    src/lib/expression/Symbol.cpp \
+    src/lib/expression/Fraction.cpp \
+    src/lib/expression/Expression.cpp
 
 HEADERS  += src/gui/view/mainwindow.h \
     src/gui/view/dbdialog.h \
@@ -37,7 +41,12 @@ HEADERS  += src/gui/view/mainwindow.h \
     src/gui/interfaces/IImageImportView.h \
     src/lib/files/file_utils.h \
     src/lib/image/image_utils.h \
-    src/lib/image/qt_image_utils.h
+    src/lib/image/qt_image_utils.h \
+    src/lib/parse/parse_utils.h \
+    src/lib/expression/Symbol.h \
+    src/lib/expression/Item.h \
+    src/lib/expression/Fraction.h \
+    src/lib/expression/Expression.h
 
 FORMS    += src/gui/view/mainwindow.ui \
     src/gui/view/dbdialog.ui \
