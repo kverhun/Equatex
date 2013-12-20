@@ -45,7 +45,18 @@ QStringList DBConnection::GetStyles()
     return styles;
 }
 
-bool DBConnection::InsertImage(QString path, int size,
+QStringList DBConnection::GetSymbolCmds()
+{
+    QStringList cmds = QStringList();
+    QString query = QString::fromStdString(querySelectSymbolCmds);
+    QSqlQuery q(db);
+    q.exec(query);
+    while(q.next())
+        cmds.append(q.value(0).toString());
+    return cmds;
+}
+
+bool DBConnection::InsertImage(QString path,
                                int width, int height,
                                QString type, int symbol_id)
 {
@@ -59,7 +70,6 @@ bool DBConnection::InsertImage(QString path, int size,
     QSqlQuery q(db);
     q.prepare(qquery);
     q.addBindValue(path);
-    q.addBindValue(size);
     q.addBindValue(width);
     q.addBindValue(height);
     q.addBindValue(type);
@@ -68,4 +78,21 @@ bool DBConnection::InsertImage(QString path, int size,
     if (!q.isActive())
         return false;
     return true;
+}
+
+int DBConnection::GetSymbolIdByCmd(QString cmd)
+{
+    QSqlQuery q(db);
+    QString qquery = QString::fromStdString(querySymbolIdByCmdRAW);
+    q.prepare(qquery);
+    q.addBindValue(cmd);
+    q.exec();
+    if (!q.isActive())
+    {
+        return -1;
+    }
+    else
+    {
+        return q.value(0).toInt();
+    }
 }

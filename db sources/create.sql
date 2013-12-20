@@ -5,7 +5,7 @@ create table latex_symbols
 (
 
        symbol_id INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
-       latex_symbol_cmd VARCHAR(50) NOT NULL
+       latex_symbol_cmd VARCHAR(50) NOT NULL UNIQUE
 );
 
 create table Symbols
@@ -17,7 +17,6 @@ create table Symbols
 create table Symbol_Images
 (
        symbol_image_path VARCHAR(100) NOT NULL,
-       symbol_image_size INTEGER NULL,
        symbol_image_width INTEGER NULL,
        symbol_image_height INTEGER NULL,
        image_type_name VARCHAR(100) NOT NULL,

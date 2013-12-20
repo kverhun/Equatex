@@ -65,6 +65,8 @@ void Presenter::onDBConnection()
 
 void Presenter::onImageImport()
 {
+    view_import->setImageTypes(model.GetStyles());
+    view_import->setSymbols(model.GetSymbolCmds());
     view_import->execute();
 }
 
@@ -98,7 +100,9 @@ void Presenter::on_xmlSaveAsked()
 
 void Presenter::on_import_browse()
 {
-    QString fname = QFileDialog::getOpenFileName();
+    QFileDialog fdialog;
+    fdialog.setNameFilter("JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif");
+    QString fname = fdialog.getOpenFileName();
     view_import->setImagePath(fname);
 }
 
@@ -109,5 +113,17 @@ void Presenter::on_import_cancel()
 
 void Presenter::on_import_import()
 {
-    view_import->shutdown();
+    bool added = model.dbAddImage(view_import->getImagePath(),
+                                  view_import->getImageType(),
+                                  view_import->getSymbolDesc());
+    if (added)
+    {
+        view_import->shutdown();
+    }
+    else
+    {
+        QMessageBox mb;
+        mb.setText("Cannot add image.\nIt may be defective of already added");
+        mb.exec();
+    }
 }

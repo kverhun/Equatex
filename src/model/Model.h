@@ -11,8 +11,11 @@ public:
 
     // queries to database
     QStringList GetStyles();
+    QStringList GetSymbolCmds();
 
-    bool dbAddImage(QString path, int size,
+    bool dbAddImage(QString path, QString type, QString latex_cmd);
+
+    bool dbAddImage(QString path,
                     int width, int height,
                     QString type, int symbol_id);
 private:

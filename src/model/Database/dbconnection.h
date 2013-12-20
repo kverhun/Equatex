@@ -18,9 +18,11 @@ public:
     bool isSuccessful() {return successful;}
 
     QStringList GetStyles();
-    bool InsertImage(QString path, int size,
+    QStringList GetSymbolCmds();
+    bool InsertImage(QString path,
                      int width, int height,
                      QString type, int symbol_id);
+    int GetSymbolIdByCmd(QString cmd);
 private:
     DBConnection();
     static DBConnection* instance;
