@@ -2,6 +2,7 @@
 #define IVIEW_H
 
 #include <QString>
+#include <QImage>
 
 class IView
 {
@@ -27,6 +28,8 @@ public:
     // xml tab selected
     virtual void on_xmlTabSelected() = 0;
 
+    // image generate clicked
+    virtual void on_imageGenerate_clicked() = 0;
 
 
 
@@ -44,6 +47,7 @@ public:
     virtual void setXmlText(QString strxml) = 0;
     virtual void setStyleItems(QStringList items) = 0;
     virtual void setCurrentTab(int tab) = 0;
+    virtual void setImage(QImage img) = 0;
 };
 
 #endif // IVIEW_H

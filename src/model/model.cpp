@@ -86,4 +86,14 @@ int Model::GetSymbolIdByCmd(QString cmd)
     return connection->GetSymbolIdByCmd(cmd);
 }
 
+QImage Model::Image()
+{
+    return this->img;
+}
+
+void Model::ImageConstruct(int w, int h, QColor background)
+{
+    //
+    this->img = create_image(w,h,background);
+}
 

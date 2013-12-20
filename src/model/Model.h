@@ -4,6 +4,7 @@
 #include "Database/dbconnection.h"
 #include "src/lib/expression/Expression.h"
 #include <QString>
+#include <QImage>
 
 class Model
 {
@@ -26,11 +27,18 @@ public:
     const Expression& Expr() const;
     void ExpressionConstruct(QString latex_str);
     QString ExpressionLatex() const;
+
+    QImage Image();
+    void ImageConstruct(int w, int h, QColor background);
 private:
 
     // storing current expression
     Expression expr;
     QString expr_latex;
+
+    // storing current image
+    QImage img;
+
 
 };
 

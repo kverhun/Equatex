@@ -30,7 +30,7 @@ public:
 
 
     void setCurrentTab(int tab);
-
+    void setImage(QImage img);
 private slots:
     void on_openLatex_button_clicked();
     void on_menuTools_DBConnection_clicked();
@@ -40,6 +40,10 @@ private slots:
     void on_saveXml_button_clicked();
 
     void on_editor_tab_currentChanged(int index);
+
+    void on_regenImage_button_clicked();
+
+    void on_imageGen_button_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -54,6 +58,7 @@ signals:
     void on_xmlSave_clicked();
     void on_xmlTabSelected();
     void on_latexOpen_clicked();
+    void on_imageGenerate_clicked();
 
 };
 

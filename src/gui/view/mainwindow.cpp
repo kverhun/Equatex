@@ -3,6 +3,8 @@
 
 #include <QMessageBox>
 
+#include <QImage>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -21,6 +23,12 @@ void MainWindow::initialize()
     this->setWindowTitle("Equatex project");
     connect(this->ui->actionDatabase_connection, SIGNAL(triggered()), this, SLOT(on_menuTools_DBConnection_clicked()));
     connect(this->ui->actionImport_image, SIGNAL(triggered()), this, SLOT(on_menuTools_ImportImage_clicked()));
+
+    QStringList img_size = QStringList();
+    img_size.append("320 x 240");
+    img_size.append("400 x 240");
+    this->ui->imageSize_cbox->clear();
+    this->ui->imageSize_cbox->addItems(img_size);
 }
 
 MainWindow::~MainWindow()
@@ -84,4 +92,26 @@ void MainWindow::setStyleItems(QStringList items)
 void MainWindow::setCurrentTab(int tab)
 {
     ui->editor_tab->setCurrentIndex(tab);
+}
+
+void MainWindow::on_regenImage_button_clicked()
+{
+    QImage img("D:\\projects\\C++\\QT\\images\\qtimage\\imgs\\dig_0.jpg");
+    img = img.scaled(1300,1000);
+
+    ui->image_label->setPixmap(QPixmap::fromImage(img));
+
+
+    //ui->image_label->show();
+}
+
+void MainWindow::setImage(QImage img)
+{
+    this->ui->image_label->setFixedSize(img.width(), img.height());
+    this->ui->image_label->setPixmap(QPixmap::fromImage(img));
+}
+
+void MainWindow::on_imageGen_button_clicked()
+{
+    emit(on_imageGenerate_clicked());
 }

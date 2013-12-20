@@ -8,6 +8,8 @@ using std::vector;
 #include <string>
 using std::string;
 
+#include <QImage>
+
 extern vector<string> cmd_chars;
 
 class tex_char
@@ -33,6 +35,8 @@ public:
     void set_bot_index(Expression expr);
     string toXml();
     tex_char get_char();
+
+    QImage toImage();
 private:
     tex_char ch;
     string cmd;

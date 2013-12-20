@@ -50,6 +50,9 @@ private slots:
     // for xml-file saving
     void on_xmlSaveAsked();
 
+    // for image generation
+    void on_imageGenerateAsked();
+
     /*
      *  Image import dialog
      */

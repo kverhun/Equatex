@@ -41,6 +41,7 @@ void Presenter::initialize()
     connect(qview, SIGNAL(on_xmlTabSelected()), this, SLOT(on_xmlPreviewAsked()));
     connect(qview, SIGNAL(on_xmlSave_clicked()), this, SLOT(on_xmlSaveAsked()));
     connect(qview, SIGNAL(on_latexOpen_clicked()), this, SLOT(on_latexOpenAsked()));
+    connect(qview, SIGNAL(on_imageGenerate_clicked()), this, SLOT(on_imageGenerateAsked()));
 
     /*
      *  END MainWindow connectiong
@@ -166,4 +167,31 @@ void Presenter::on_import_import()
         mb.setText("Cannot add image.\nIt may be defective of already added");
         mb.exec();
     }
+}
+
+void Presenter::on_imageGenerateAsked()
+{
+    try
+    {
+        model.ExpressionConstruct(view_main->getLatexText());
+    }
+    catch(...)
+    {
+        QMessageBox mb;
+        mb.setText("Invalid expression entered!");
+        mb.exec();
+        return;
+    }
+    try
+    {
+        model.ImageConstruct(200, 100, QColor(Qt::white));
+    }
+    catch(...)
+    {
+        QMessageBox mb;
+        mb.setText("Image construction error.");
+        mb.exec();
+        return;
+    }
+    view_main->setImage(model.Image());
 }
