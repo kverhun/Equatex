@@ -5,7 +5,8 @@
 #include<QMessageBox>
 
 #include "src/lib/files/file_utils.h"
-#include "src/lib/image/image_utils.h"
+//#include "src/lib/image/image_utils.h"
+#include "src/lib/image/qt_image_utils.h"
 
 using namespace std;
 
@@ -39,15 +40,19 @@ bool Model::dbAddImage(QString path,
 
 bool Model::dbAddImage(QString path, QString type, QString latex_cmd)
 {
-    pair<int,int> img_res = getImageSize(path.toStdString());
-    if (img_res.first < 0 || img_res.second < 0)
+    int w = get_image_width(path);
+    int h = get_image_height(path);
+    if (w < 0 || h < 0 || w > 200 || h > 200)
         return false;
+
     DBConnection* connection = DBConnection::Instance();
+
     int symbol_id = connection->GetSymbolIdByCmd(latex_cmd);
+
     if (symbol_id == -1)
         return false;
 
-    bool added = connection->InsertImage(path,img_res.first, img_res.second,type,symbol_id);
+    bool added = connection->InsertImage(path,w,h,type,symbol_id);
     return added;
 }
 

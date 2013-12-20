@@ -93,6 +93,7 @@ int DBConnection::GetSymbolIdByCmd(QString cmd)
     }
     else
     {
-        return q.value(0).toInt();
+        while(q.next())
+            return q.value(0).toInt();
     }
 }

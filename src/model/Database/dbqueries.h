@@ -12,8 +12,10 @@ const string queryInsertImageRAW=\
         "VALUES(?,?,?,?,?);";
 
 const string querySymbolIdByCmdRAW=\
-        "SELECT symbol_id FROM latex_symbols"
+        "SELECT symbol_id FROM latex_symbols "
         "WHERE latex_symbol_cmd=?;";
+
+
 
 const string querySelectSymbolCmds = "SELECT latex_symbol_cmd FROM latex_symbols;";
 

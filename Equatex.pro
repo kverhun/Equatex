@@ -22,7 +22,8 @@ SOURCES += main.cpp \
     src/model/model.cpp \
     src/model/Database/dbconnection.cpp \
     src/lib/files/file_utils.cpp \
-    src/lib/image/image_utils.cpp
+    src/lib/image/image_utils.cpp \
+    src/lib/image/qt_image_utils.cpp
 
 HEADERS  += src/gui/view/mainwindow.h \
     src/gui/view/dbdialog.h \
@@ -35,7 +36,8 @@ HEADERS  += src/gui/view/mainwindow.h \
     src/model/Database/dbqueries.h \
     src/gui/interfaces/IImageImportView.h \
     src/lib/files/file_utils.h \
-    src/lib/image/image_utils.h
+    src/lib/image/image_utils.h \
+    src/lib/image/qt_image_utils.h
 
 FORMS    += src/gui/view/mainwindow.ui \
     src/gui/view/dbdialog.ui \
