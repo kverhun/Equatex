@@ -115,3 +115,19 @@ void MainWindow::on_imageGen_button_clicked()
 {
     emit(on_imageGenerate_clicked());
 }
+
+QString MainWindow::getSelectedType()
+{
+    return ui->imageStyle_cbox->currentText();
+}
+
+
+int MainWindow::getImageWidth()
+{
+    return 320;
+}
+
+int MainWindow::getImageHeight()
+{
+    return 240;
+}

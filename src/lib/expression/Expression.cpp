@@ -6,6 +6,10 @@
 
 #include <algorithm>
 #include <string>
+#include <list>
+
+#include <QColor>
+#include <QPainter>
 
 using namespace std;
 
@@ -64,7 +68,7 @@ Expression::Expression(string texexpr)
                     frac->set_top(Expression(args[0]));
                     frac->set_bot(Expression(args[1]));
                     items.push_back(frac);
-                    pos += 2 + args[0].length() + 2 + args[1].length()+1;
+                    pos += 2 + args[0].length() + 2 + args[1].length();
                 }
                 if (find(cmd_chars.begin(), cmd_chars.end(),cmd)!= cmd_chars.end())
                 {
@@ -124,4 +128,48 @@ string Expression::toXml() const
     }
     else
         return "<expression>\n invalid expr \n </expression>\n";
+}
+
+QImage Expression::toImage(int width, int height, QString type, QColor background) const
+{
+    QImage expr_img(width, height, QImage::Format_RGB32);
+    list<QImage> item_imgs = list<QImage>();
+    list<int> widths = list<int>();
+    int sum_width = 0;
+    expr_img.fill(background);
+    for (Item* it : items)
+    {
+        int w = it->width_symbols();
+        widths.push_back(w);
+        sum_width += w;
+    }
+    for (int &i : widths)
+    {
+        i *= width;
+        i /= sum_width;
+    }
+
+    auto it_w = widths.begin();
+    for (Item* it : items)
+    {
+        item_imgs.push_back(it->toImage(*it_w, height,type));
+        ++it_w;
+    }
+
+    QPoint pos = QPoint(0,0);
+    QPainter painter(&expr_img);
+    for (QImage img : item_imgs)
+    {
+        painter.drawImage(pos, img);
+        pos += QPoint(img.width(),0);
+    }
+    return expr_img;
+}
+
+int Expression::width_symbols()
+{
+    int w = 0;
+    for (Item* it : items)
+        w += it->width_symbols();
+    return w;
 }

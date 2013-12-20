@@ -65,3 +65,25 @@ tex_char Symbol::get_char()
 {
     return this->ch;
 }
+
+
+QImage Symbol::toImage(int width, int height, QString type)
+{
+    QImage symb_img = QImage(width, height, QImage::Format_RGB32);
+    symb_img.fill(Qt::blue);
+    return symb_img;
+}
+
+
+int Symbol::width_symbols()
+{
+    return 1 + max(this->bot_index.width_symbols()/2, this->top_index.width_symbols()/2);
+}
+
+
+
+
+
+
+
+

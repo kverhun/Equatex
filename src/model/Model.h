@@ -29,7 +29,7 @@ public:
     QString ExpressionLatex() const;
 
     QImage Image();
-    void ImageConstruct(int w, int h, QColor background);
+    void ImageConstruct(int w, int h, QString type, QColor background);
 private:
 
     // storing current expression

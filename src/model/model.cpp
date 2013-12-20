@@ -91,9 +91,9 @@ QImage Model::Image()
     return this->img;
 }
 
-void Model::ImageConstruct(int w, int h, QColor background)
+void Model::ImageConstruct(int w, int h, QString type, QColor background)
 {
     //
-    this->img = create_image(w,h,background);
+    this->img = this->expr.toImage(w,h,type, background);
 }
 

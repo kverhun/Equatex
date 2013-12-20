@@ -9,6 +9,7 @@ using std::vector;
 using std::string;
 
 #include <QImage>
+#include <QString>
 
 extern vector<string> cmd_chars;
 
@@ -36,7 +37,8 @@ public:
     string toXml();
     tex_char get_char();
 
-    QImage toImage();
+    QImage toImage(int width, int height, QString type);
+    int width_symbols();
 private:
     tex_char ch;
     string cmd;

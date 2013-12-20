@@ -39,7 +39,9 @@ public:
      *
      */
     virtual QString getLatexText() = 0;
-
+    virtual QString getSelectedType() = 0;
+    virtual int getImageWidth() = 0;
+    virtual int getImageHeight() = 0;
     /*
      *  Setter functions
      *

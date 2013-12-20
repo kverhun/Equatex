@@ -184,7 +184,8 @@ void Presenter::on_imageGenerateAsked()
     }
     try
     {
-        model.ImageConstruct(200, 100, QColor(Qt::white));
+        model.ImageConstruct(view_main->getImageWidth(), view_main->getImageHeight(),
+                             view_main->getSelectedType(), QColor(Qt::white));
     }
     catch(...)
     {

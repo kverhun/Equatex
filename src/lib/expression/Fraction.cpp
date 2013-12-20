@@ -39,3 +39,18 @@ string Fraction::toXml()
     return xml;
 }
 
+QImage Fraction::toImage(int width, int height, QString type)
+{
+    QImage frac_img = QImage(width, height, QImage::Format_RGB32);
+
+    frac_img.fill(Qt::black);
+
+    return frac_img;
+}
+
+int Fraction::width_symbols()
+{
+    int w_top = top.width_symbols();
+    int w_bot = bot.width_symbols();
+    return w_top > w_bot ? w_top : w_bot;
+}

@@ -17,10 +17,15 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+
     /*
      *  Getter functions
      */
     QString getLatexText();
+    QString getSelectedType();
+    int getImageWidth();
+    int getImageHeight();
+
 
     /*
      *  Setter functions

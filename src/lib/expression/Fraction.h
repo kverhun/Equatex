@@ -12,6 +12,10 @@ public:
     void set_top (Expression expr);
     void set_bot (Expression expr);
     string toXml();
+
+    QImage toImage(int width, int height, QString type);
+
+    int width_symbols();
 private:
     Expression top;
     Expression bot;
