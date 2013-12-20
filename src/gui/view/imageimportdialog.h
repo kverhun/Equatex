@@ -26,6 +26,8 @@ public:
     QString getImageType();
     QString getSymbolDesc();
     QString getImagePath();
+    QString getNewTypeName();
+    QString getNewTypeDesc();
 
     /*
      *  Setter functions
@@ -39,13 +41,15 @@ signals:
     void on_browse_clicked();
     void on_cancel_clicked();
     void on_import_clicked();
-
+    void on_add_clicked();
 private slots:
     void on_import_button_clicked();
 
     void on_cancel_button_clicked();
 
     void on_imageBrowse_button_clicked();
+
+    void on_addClass_button_clicked();
 
 private:
     Ui::ImageImportDialog *ui;

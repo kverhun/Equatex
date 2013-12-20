@@ -1,6 +1,7 @@
 #include "imageimportdialog.h"
 #include "ui_imageimportdialog.h"
 
+#include <QMessageBox>
 
 ImageImportDialog::ImageImportDialog(QWidget *parent) :
     QDialog(parent),
@@ -51,6 +52,17 @@ QString ImageImportDialog::getImagePath()
     return this->ui->imagePath_edit->text();
 }
 
+QString ImageImportDialog::getNewTypeName()
+{
+    return this->ui->className_edit->text();
+}
+
+QString ImageImportDialog::getNewTypeDesc()
+{
+    return this->ui->classDesc_edit->text();
+}
+
+
 /*
  *  Setter functions
  *
@@ -85,4 +97,16 @@ void ImageImportDialog::on_cancel_button_clicked()
 void ImageImportDialog::on_imageBrowse_button_clicked()
 {
     emit(on_browse_clicked());
+}
+
+void ImageImportDialog::on_addClass_button_clicked()
+{
+    if (this->ui->className_edit->text().isEmpty())
+    {
+        QMessageBox mb;
+        mb.setText("Type name can not be empty!");
+        mb.exec();
+    }
+    else
+        emit(on_add_clicked());
 }

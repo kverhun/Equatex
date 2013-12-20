@@ -24,11 +24,8 @@ void MainWindow::initialize()
     connect(this->ui->actionDatabase_connection, SIGNAL(triggered()), this, SLOT(on_menuTools_DBConnection_clicked()));
     connect(this->ui->actionImport_image, SIGNAL(triggered()), this, SLOT(on_menuTools_ImportImage_clicked()));
 
-    QStringList img_size = QStringList();
-    img_size.append("320 x 240");
-    img_size.append("400 x 240");
-    this->ui->imageSize_cbox->clear();
-    this->ui->imageSize_cbox->addItems(img_size);
+    ui->imageHeigth_edit->setText(320);
+    ui->imageWidth_edit->setText(240);
 }
 
 MainWindow::~MainWindow()
@@ -51,11 +48,6 @@ void MainWindow::on_menuTools_ImportImage_clicked()
     emit(on_menuTools_ImportImage());
 }
 
-/*
- QString getLatexText();
-
-    void setXmlText(QString strxml);
-*/
 
 QString MainWindow::getLatexText()
 {
@@ -122,12 +114,12 @@ QString MainWindow::getSelectedType()
 }
 
 
-int MainWindow::getImageWidth()
+QString MainWindow::getImageWidth()
 {
-    return 320;
+    return ui->imageWidth_edit->text();
 }
 
-int MainWindow::getImageHeight()
+QString MainWindow::getImageHeight()
 {
-    return 240;
+    return ui->imageHeigth_edit->text();
 }

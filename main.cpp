@@ -3,6 +3,8 @@
 
 #include "src/gui/presenter/presenter.h"
 
+#include <QColor>
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -12,6 +14,7 @@ int main(int argc, char *argv[])
     Q_UNUSED(presenter);
 
     w.show();
+
 
     return a.exec();
 }

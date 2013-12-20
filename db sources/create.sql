@@ -29,7 +29,7 @@ create table Symbol_Images
 create table image_types
 (
        image_type_name VARCHAR(100) NOT NULL,
-       image_type_description VARCHAR(200) NULL,
+       image_type_desc VARCHAR(100) NULL,
        PRIMARY KEY (image_type_name)
 );
 

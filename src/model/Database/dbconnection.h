@@ -19,10 +19,12 @@ public:
 
     QStringList GetStyles();
     QStringList GetSymbolCmds();
+    QString GetPathByCmd(QString cmd, QString type);
     bool InsertImage(QString path,
                      int width, int height,
                      QString type, int symbol_id);
     int GetSymbolIdByCmd(QString cmd);
+    bool InsertImageType(QString type_name, QString type_desc);
 private:
     DBConnection();
     static DBConnection* instance;

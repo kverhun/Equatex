@@ -9,8 +9,8 @@ using std::list;
 #include <QImage>
 #include <QString>
 
-const double frac_coef = 0.75;
-const double ind_coef = 0.75;
+const double frac_coef = 1;
+const double ind_coef = 1;
 
 class Expression
 {

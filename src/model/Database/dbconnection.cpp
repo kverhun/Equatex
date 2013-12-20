@@ -97,3 +97,49 @@ int DBConnection::GetSymbolIdByCmd(QString cmd)
             return q.value(0).toInt();
     }
 }
+
+bool DBConnection::InsertImageType(QString type_name, QString type_desc)
+{
+    QSqlQuery q(db);
+    QString qquery = QString::fromStdString(queryInsertImageTypeRAW);
+    q.prepare(qquery);
+    q.addBindValue(type_name);
+    q.addBindValue(type_desc);
+    q.exec();
+    if (!q.isActive())
+        return false;
+    return true;
+}
+
+QString DBConnection::GetPathByCmd(QString cmd, QString type)
+{
+    QSqlQuery q(db);
+    QString qquery = QString::fromStdString(queryImagePathByCmdRAW);
+    q.prepare(qquery);
+    q.addBindValue(cmd);
+    q.addBindValue(type);
+    q.exec();
+    QString res;
+    if (q.isActive())
+    {
+        while(q.next())
+            return q.value(0).toString();
+    }
+    else
+    {
+        if (type != "default")
+        {
+            return this->GetPathByCmd(cmd, "default");
+        }
+        else
+        {
+            return "error";
+        }
+    }
+}
+
+
+
+
+
+

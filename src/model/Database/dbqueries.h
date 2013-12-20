@@ -16,7 +16,21 @@ const string querySymbolIdByCmdRAW=\
         "WHERE latex_symbol_cmd=?;";
 
 
+const string queryInsertImageTypeRAW=\
+        "INSERT INTO image_types"
+        "(image_type_name,image_type_desc) "
+        "VALUES (?,?)";
 
 const string querySelectSymbolCmds = "SELECT latex_symbol_cmd FROM latex_symbols;";
+
+
+const string queryImagePathByCmdRAW =\
+        "select symbol_image_path "
+        "from "
+               "symbol_images left outer join symbols using(symbol_id) "
+        "left outer join latex_symbols using(symbol_id) "
+        "where latex_symbol_cmd=? "
+        "AND image_type_name=? ;";
+
 
 #endif // DBQUERIES_H

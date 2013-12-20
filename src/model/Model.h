@@ -22,6 +22,9 @@ public:
     bool dbAddImage(QString path,
                     int width, int height,
                     QString type, int symbol_id);
+
+    bool dbAddImageClass(QString name, QString desc);
+
     ~Model();
 
     const Expression& Expr() const;

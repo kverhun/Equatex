@@ -1,5 +1,8 @@
 #include "Fraction.h"
+#include <QColor>
 
+#include "src/lib/image/qt_image_utils.h"
+#include "Symbol.h"
 using namespace std;
 
 Fraction::Fraction()
@@ -39,11 +42,35 @@ string Fraction::toXml()
     return xml;
 }
 
-QImage Fraction::toImage(int width, int height, QString type)
+QImage Fraction::toImage(int width, int height, QString type, QColor background)
 {
     QImage frac_img = QImage(width, height, QImage::Format_RGB32);
+    frac_img.fill(background);
 
-    frac_img.fill(Qt::black);
+    int top_h = height/2;
+    int bot_h = height/2;
+
+    int mx = max(top.width_symbols(), bot.width_symbols());
+
+    int top_w = width*top.width_symbols()/mx;
+    int bot_w = width*bot.width_symbols()/mx;
+
+    int top_pos_w = (width - top_w)/2;
+    int bot_pos_w = (width - bot_w)/2;
+
+    int top_pos_h = 0;
+    int bot_pos_h = height/2;
+
+    QImage top_img = top.toImage(top_w, top_h,type, background);
+    QImage bot_img = bot.toImage(bot_w, bot_h, type, background);
+
+    InsertImage(frac_img, top_img, top_pos_w, top_pos_h);
+    InsertImage(frac_img, bot_img, bot_pos_w, bot_pos_h);
+
+    Symbol line = Symbol("-");
+    QImage line_img = line.toImage(100,100, type, background);
+    line_img = line_img.scaled(max(top_w, bot_w),height/15);
+    InsertImage(frac_img, line_img, 0, height/2-height/15);
 
     return frac_img;
 }

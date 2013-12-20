@@ -23,8 +23,8 @@ public:
      */
     QString getLatexText();
     QString getSelectedType();
-    int getImageWidth();
-    int getImageHeight();
+    QString getImageWidth();
+    QString getImageHeight();
 
 
     /*

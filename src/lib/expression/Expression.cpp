@@ -3,7 +3,7 @@
 #include "Symbol.h"
 #include "Fraction.h"
 #include "src/lib/parse/parse_utils.h"
-
+#include "src/lib/image/qt_image_utils.h"
 #include <algorithm>
 #include <string>
 #include <list>
@@ -38,7 +38,22 @@ bool Expression::isValid() const
 Expression::Expression(string texexpr)
 {
     size_t pos = 0;
-    texexpr.erase(remove(texexpr.begin(), texexpr.end(), ' '), texexpr.end());
+    //texexpr.erase(remove(texexpr.begin(), texexpr.end(), ' '), texexpr.end());
+
+    size_t index = 0;
+    while (true) {
+         /* Locate the substring to replace. */
+         index = texexpr.find("  ", index);
+         if (index == string::npos) break;
+
+         /* Make the replacement. */
+         texexpr.replace(index, 1, " ");
+
+         /* Advance index forward so the next iteration doesn't pick it up as well. */
+         index += 1;
+    }
+
+
     this->valid = true;
     try
     {
@@ -132,6 +147,12 @@ string Expression::toXml() const
 
 QImage Expression::toImage(int width, int height, QString type, QColor background) const
 {
+    if (this->isEmpty())
+    {
+        QImage img(1,1,QImage::Format_RGB32);
+        img.fill(background);
+        return img;
+    }
     QImage expr_img(width, height, QImage::Format_RGB32);
     list<QImage> item_imgs = list<QImage>();
     list<int> widths = list<int>();
@@ -152,16 +173,19 @@ QImage Expression::toImage(int width, int height, QString type, QColor backgroun
     auto it_w = widths.begin();
     for (Item* it : items)
     {
-        item_imgs.push_back(it->toImage(*it_w, height,type));
+        item_imgs.push_back(it->toImage(*it_w, height,type,background));
         ++it_w;
     }
 
-    QPoint pos = QPoint(0,0);
-    QPainter painter(&expr_img);
+    //QPoint pos = QPoint(0,0);
+    //QPainter painter(&expr_img);
+    int pos_w = 0;
     for (QImage img : item_imgs)
     {
-        painter.drawImage(pos, img);
-        pos += QPoint(img.width(),0);
+        //painter.drawImage(pos, img);
+        //pos += QPoint(img.width(),0);
+        InsertImage(expr_img, img, pos_w, 0);
+        pos_w += img.width();
     }
     return expr_img;
 }

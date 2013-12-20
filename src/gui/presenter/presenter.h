@@ -64,6 +64,9 @@ private slots:
 
     // for cancel
     void on_import_cancel();
+
+    // for add image type
+    void on_import_addType();
     /*
      *  END Image import dialog
      */

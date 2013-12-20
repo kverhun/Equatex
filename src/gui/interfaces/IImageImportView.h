@@ -14,7 +14,7 @@ public:
     virtual void on_import_clicked() = 0;
     virtual void on_cancel_clicked() = 0;
     virtual void on_browse_clicked() = 0;
-
+    virtual void on_add_clicked() = 0;
 
 
     /*
@@ -25,6 +25,8 @@ public:
     virtual QString getImageType() = 0;
     virtual QString getSymbolDesc() = 0;
     virtual QString getImagePath() = 0;
+    virtual QString getNewTypeName() = 0;
+    virtual QString getNewTypeDesc() = 0;
 
     /*
      *  Setter functions

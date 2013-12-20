@@ -66,7 +66,7 @@ bool Model::dbAddImage(QString path, QString type, QString latex_cmd)
 {
     int w = get_image_width(path);
     int h = get_image_height(path);
-    if (w < 0 || h < 0 || w > 200 || h > 200)
+    if (w < 0 || h < 0 || w > 1000 || h > 1000)
         return false;
 
     DBConnection* connection = DBConnection::Instance();
@@ -97,3 +97,8 @@ void Model::ImageConstruct(int w, int h, QString type, QColor background)
     this->img = this->expr.toImage(w,h,type, background);
 }
 
+bool Model::dbAddImageClass(QString name, QString desc)
+{
+    DBConnection* connection = DBConnection::Instance();
+    return connection->InsertImageType(name, desc);
+}

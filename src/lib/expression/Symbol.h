@@ -37,7 +37,7 @@ public:
     string toXml();
     tex_char get_char();
 
-    QImage toImage(int width, int height, QString type);
+    QImage toImage(int width, int height, QString type, QColor background);
     int width_symbols();
 private:
     tex_char ch;

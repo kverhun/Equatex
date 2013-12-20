@@ -54,6 +54,7 @@ void Presenter::initialize()
     connect(qimport, SIGNAL(on_import_clicked()), this, SLOT(on_import_import()));
     connect(qimport, SIGNAL(on_cancel_clicked()), this, SLOT(on_import_cancel()));
     connect(qimport, SIGNAL(on_browse_clicked()), this, SLOT(on_import_browse()));
+    connect(qimport, SIGNAL(on_add_clicked()), this, SLOT(on_import_addType()));
     /*
      *  END Import connecting
      */
@@ -159,7 +160,7 @@ void Presenter::on_import_import()
                                   view_import->getSymbolDesc());
     if (added)
     {
-        view_import->shutdown();
+        //view_import->shutdown();
     }
     else
     {
@@ -184,7 +185,29 @@ void Presenter::on_imageGenerateAsked()
     }
     try
     {
-        model.ImageConstruct(view_main->getImageWidth(), view_main->getImageHeight(),
+        bool ok;
+        int w = -1;
+        w = view_main->getImageWidth().toInt(&ok);
+        if (!ok || w <= 100)
+        {
+            QMessageBox mb;
+            mb.setText("Incorect image width!");
+            mb.exec();
+            return;
+        }
+
+        int h = -1;
+        h = view_main->getImageHeight().toInt(&ok);
+        if (!ok || h < 100)
+        {
+            QMessageBox mb;
+            mb.setText("Incorect image height!");
+            mb.exec();
+            return;
+        }
+
+
+        model.ImageConstruct(w,h,
                              view_main->getSelectedType(), QColor(Qt::white));
     }
     catch(...)
@@ -195,4 +218,22 @@ void Presenter::on_imageGenerateAsked()
         return;
     }
     view_main->setImage(model.Image());
+}
+
+void Presenter::on_import_addType()
+{
+    bool successful = model.dbAddImageClass(view_import->getNewTypeName(), view_import->getNewTypeDesc());
+    if (!successful)
+    {
+        QMessageBox mb;
+        mb.setText("Class adding error");
+        mb.exec();
+    }
+    else
+    {
+        view_import->setImageTypes(model.GetStyles());
+        QMessageBox mb;
+        mb.setText("Class successfully added");
+        mb.exec();
+    }
 }
